@@ -97,7 +97,9 @@ public:
     // Name must not be empty. If empty, keep current name.
     void setName(string n) {
         // YOUR CODE HERE
-        name = n;
+        if(!n.empty()){
+             name = n;
+        }
     }
 
     // TODO 3b: Setter for GPA
@@ -128,14 +130,14 @@ public:
     // Two students are equal if they have the same id
     bool operator==(const Student& other) const {
         // YOUR CODE HERE
-        return id == other.id;
+        return id == other.getId();
     }
 
     // TODO 5b: Less-than operator (<)
     // Compare by GPA (lower GPA = "less than")
     bool operator<(const Student& other) const {
         // YOUR CODE HERE
-        return gpa < other.gpa;
+        return gpa < other.getGpa();
     }
 
     // TODO 5c: Stream insertion operator (<<)
@@ -143,7 +145,7 @@ public:
     // Example: "Student(Ali, ID: 101, GPA: 3.5)"
     friend ostream& operator<<(ostream& os, const Student& s) {
         // YOUR CODE HERE
-        os << s.name << "ID: " << s.id << "GPA: " << s.gpa << "\n"; 
+        os << "Student("<<s.name<<", ID: "<<s.id<<", GPA: "<<s.gpa<<")";
         return os;
     }
 };
@@ -156,7 +158,7 @@ public:
 // Version 1: Takes two Student references, returns the one with higher GPA
 Student findBestStudent(const Student& a, const Student& b) {
     // YOUR CODE HERE
-    if(a.getGpa() < b.getGpa()){
+    if(a < b){
         return b;
     }
     else { return a; }
